@@ -1,0 +1,63 @@
+<ion-navbar *navbar>
+    <ion-title>
+        Angular Fire Test App
+    </ion-title>
+    
+</ion-navbar>
+<ion-content padding>
+    <h1>User Login</h1>
+    <form #loginCreds="ngForm">
+        <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input type="text" ngControl="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" ngControl="password"></ion-input>
+        </ion-item>
+
+        <div padding>
+            <button block (click)="login(loginCreds.value, $event)">
+              <ion-icon ios="ios-log-in" md="md-log-in">
+            </ion-icon> Login</button>
+            <button block secondary (click)="registerUser(loginCreds.value, $event)">
+              <ion-icon ios="ios-bicycle" md="md-bicycle"></ion-icon>
+               Create Account</button>
+         </div>
+         
+         <div padding>
+              <ion-segment [(ngModel)]="logintype" danger>
+                <ion-segment-button value="github">
+                  Github
+                </ion-segment-button>
+                <ion-segment-button value="twitter">
+                  Twitter
+                </ion-segment-button>
+              </ion-segment>
+         </div>
+         
+         
+         <div [ngSwitch]="logintype">
+          <div *ngSwitchWhen="'github'">
+            <button block (click)="registerUserWithGitHub(loginCreds.value, $event)">
+              <ion-icon ios="logo-github" md="logo-github"></ion-icon> 
+              Connect with GitHub</button>       
+          </div>
+
+          <div *ngSwitchWhen="'twitter'">
+            <button block (click)="registerUserWithTwitter(loginCreds.value, $event)">
+              <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon> 
+              Connect with Twitter</button>         
+          </div>
+        </div>
+                 
+        <!--<div padding>
+            <button block (click)="registerUserWithGitHub(loginCreds.value, $event)">Connect with GitHub</button>
+            <button block (click)="registerUserWithTwitter(loginCreds.value, $event)">Connect with Twitter</button>
+        </div>-->
+        <div padding>
+            <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
+        </div>
+    </form>
+</ion-content>

@@ -1,0 +1,37 @@
+<!--
+  Generated template for the NewItemPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-title>
+        Add Item
+    </ion-title>
+</ion-navbar>
+
+<ion-content padding class="new-item">
+  
+  <form #modelData="ngForm" (ngSubmit)="addTheItem(modelData.value)">
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input required type="text" ngControl="title"></ion-input>
+    </ion-item>   
+    <ion-item>
+       <ion-label>Description</ion-label>
+       <ion-input required type="text" ngControl="description"></ion-input>
+    </ion-item>
+    
+    <div padding>
+       <button block type="submit" [disabled]="!modelData.valid">Add New Item</button>
+       <button block (click)="cancelItem($event)">Cancel</button>
+     </div>
+     
+     <div padding>
+       <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
+     </div>
+    
+    
+  </form>
+  
+</ion-content>
